@@ -1,36 +1,40 @@
-package com.ichwan.crud.restful
+package com.ichwan.crud.restful.presentation
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.ichwan.crud.restful.R
+import com.ichwan.crud.restful.adapter.PostsAdapter
 import com.ichwan.crud.restful.api.ApiClient
-import com.ichwan.crud.restful.databinding.ActivityMainBinding
+import com.ichwan.crud.restful.databinding.FragmentListPostsBinding
 import com.ichwan.crud.restful.response.PostResponse
 import retrofit2.Call
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
+class ListPostsFragment : Fragment() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: FragmentListPostsBinding
 
     private var adapter: PostsAdapter? = null
-    private var manager: LayoutManager? = null
+    private var manager: RecyclerView.LayoutManager? = null
     private var list = ArrayList<PostResponse>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentListPostsBinding.inflate(layoutInflater, container, false)
 
-        setupRecyclerView()
+        setupRecyclerView(requireContext())
         fetchDataFromApi()
-        createDataFromApi()
-    }
 
-    private fun createDataFromApi() {
-
+        return binding.root
     }
 
     private fun fetchDataFromApi() {
@@ -62,9 +66,9 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun setupRecyclerView() {
+    private fun setupRecyclerView(context: Context) {
         adapter = PostsAdapter(list)
-        manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        manager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.apply {
             rvPosts.adapter = adapter
             rvPosts.layoutManager = manager

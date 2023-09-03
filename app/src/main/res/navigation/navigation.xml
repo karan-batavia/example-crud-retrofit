@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/mainActivity">
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.ichwan.crud.restful.presentation.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/listPostsFragment"
+        android:name="com.ichwan.crud.restful.presentation.ListPostsFragment"
+        android:label="fragment_list_posts"
+        tools:layout="@layout/fragment_list_posts" >
+        <action
+            android:id="@+id/action_listPostsFragment_to_managePostsFragment"
+            app:destination="@id/managePostsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/managePostsFragment"
+        android:name="com.ichwan.crud.restful.presentation.ManagePostsFragment"
+        android:label="fragment_manage_posts"
+        tools:layout="@layout/fragment_manage_posts" />
+</navigation>
