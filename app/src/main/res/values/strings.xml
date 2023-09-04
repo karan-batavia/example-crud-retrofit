@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ExampleCrudRestfulApi</string>
+    <string name="title">Title</string>
+    <string name="body">Body</string>
+    <string name="user_id">User ID</string>
+    <string name="save">Save</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
