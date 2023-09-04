@@ -1,12 +1,16 @@
-package com.ichwan.crud.restful
+package com.ichwan.crud.restful.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ichwan.crud.restful.databinding.ItemPostsBinding
+import com.ichwan.crud.restful.listener.OnPostsClickListener
 import com.ichwan.crud.restful.response.PostResponse
 
-class PostsAdapter(val list: ArrayList<PostResponse>) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
+class PostsAdapter(
+    private val list: ArrayList<PostResponse>,
+    private var onPostsClickListener: OnPostsClickListener
+) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
     inner class ViewHolder(var binding: ItemPostsBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -24,6 +28,8 @@ class PostsAdapter(val list: ArrayList<PostResponse>) : RecyclerView.Adapter<Pos
                 binding.apply {
                     title.text = text
                     body.text = content
+
+                    itemView.setOnClickListener { onPostsClickListener.onPostClick(this@with) }
                 }
             }
         }
