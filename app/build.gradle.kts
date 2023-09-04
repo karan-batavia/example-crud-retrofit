@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.ichwan.crud.restful"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.ichwan.crud.restful"
