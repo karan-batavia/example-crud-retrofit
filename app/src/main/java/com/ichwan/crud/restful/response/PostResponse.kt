@@ -10,8 +10,12 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class PostResponse(
     val id: Int? = 0,
+
+    val userId: String? = null,
+
     @SerializedName("title")
     val text: String? = null,
+
     @SerializedName("body")
     val content: String? = null
 ) : Parcelable
