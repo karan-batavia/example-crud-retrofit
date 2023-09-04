@@ -1,18 +1,22 @@
 package com.ichwan.crud.restful.presentation
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ichwan.crud.restful.R
 import com.ichwan.crud.restful.adapter.PostsAdapter
 import com.ichwan.crud.restful.api.ApiClient
 import com.ichwan.crud.restful.databinding.FragmentListPostsBinding
+import com.ichwan.crud.restful.listener.OnPostsClickListener
 import com.ichwan.crud.restful.response.PostResponse
 import retrofit2.Call
 import retrofit2.Response
@@ -33,6 +37,10 @@ class ListPostsFragment : Fragment() {
 
         setupRecyclerView(requireContext())
         fetchDataFromApi()
+
+        binding.buttonAddPost.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.list_to_manage)
+        }
 
         return binding.root
     }
@@ -67,7 +75,14 @@ class ListPostsFragment : Fragment() {
     }
 
     private fun setupRecyclerView(context: Context) {
-        adapter = PostsAdapter(list)
+        adapter = PostsAdapter(
+            list,
+            (object : OnPostsClickListener{
+            override fun onPostClick(posts: PostResponse) {
+
+            }
+
+        }))
         manager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.apply {
             rvPosts.adapter = adapter
