@@ -1,10 +1,10 @@
 package com.ichwan.crud.restful.presentation
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ichwan.crud.restful.adapter.PostsAdapter
@@ -27,6 +27,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.buttonAddPost.setOnClickListener {
+            startActivity(Intent(this, ManagePostsActivity::class.java))
+        }
 
         setupRecyclerView(this)
         fetchDataFromApi()
@@ -66,7 +70,9 @@ class MainActivity : AppCompatActivity() {
             list,
             (object : OnPostsClickListener {
                 override fun onPostClick(posts: PostResponse) {
-                    val bundle = bundleOf(ManagePostsFragment.posts to posts)
+                    val intent = Intent(this@MainActivity, ManagePostsActivity::class.java)
+                    intent.putExtra(ManagePostsActivity.posts, posts)
+                    startActivity(intent)
                 }
 
             }))

@@ -1,6 +1,5 @@
 package com.ichwan.crud.restful.api
 
-import com.ichwan.crud.restful.response.CreatePostResponse
 import com.ichwan.crud.restful.response.PostResponse
 import retrofit2.Call
 import retrofit2.http.Field
@@ -19,5 +18,5 @@ interface ApiService {
         @Field("userId") userId: String,
         @Field("title") text: String,
         @Field("body") content: String
-    ): Call<List<CreatePostResponse>>
+    ): Call<List<PostResponse>>
 }
