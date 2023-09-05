@@ -40,7 +40,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         setupRecyclerView(this)
-        fetchDataFromApi()
+        //fetchDataFromApi()
+        //fetchDataFromApiById()
+        fetchDataFromApiByMap()
+    }
+
+    private fun fetchDataFromApiByMap() {
+        val apiService = ApiClient.getApiService()
+
+        val params = HashMap<String, String>()
+        params["userId"] = "1"
+        params["postId"] = "2"
+        val call = apiService.getPostsByQueryMap(params)
+    }
+
+    private fun fetchDataFromApiById() {
+        val apiService = ApiClient.getApiService()
+        val call = apiService.getPostsByUserId("1")
     }
 
     private fun fetchDataFromApi() {

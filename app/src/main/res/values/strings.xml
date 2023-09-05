@@ -12,4 +12,5 @@
     <string name="userid">UserID:</string>
     <string name="created_at">Created at:</string>
     <string name="updated_at">Updated at</string>
+    <string name="comments">Comments</string>
 </resources>
