@@ -42,7 +42,21 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView(this)
         //fetchDataFromApi()
         //fetchDataFromApiById()
-        fetchDataFromApiByMap()
+        //fetchDataFromApiByMap()
+
+        updatePost()
+
+        deletePost()
+    }
+
+    private fun deletePost() {
+        val apiService = ApiClient.getApiService()
+        apiService.deletePosts(1)
+    }
+
+    private fun updatePost() {
+        val apiService = ApiClient.getApiService()
+        apiService.patchPosts(1, 2, 1, null, "Hello world")
     }
 
     private fun fetchDataFromApiByMap() {
