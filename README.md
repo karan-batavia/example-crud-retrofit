@@ -34,9 +34,166 @@ The following libraries are used in the project:
 
 ### Request Method
 
-In this project, the request method used are `GET`, `POST`, `PUT` and `DELETE`.
+In this project, the request method used are `GET`, `POST`, `PUT`, `PATCH` and `DELETE`.
 
-### URL Manipulation
+* Get Data
+
+API service endpoint:
+```kotlin
+    @GET("posts")
+    fun getPosts(): Call<List<PostResponse>>
+
+    @GET("posts/{postId}/comments")
+    fun getPostsById(@Path("postId") postId: Int): Call<List<CommentResponse>>
+
+    @GET("posts")
+    fun getPostsByUserId(@Query("userId") userId: String): Call<PostResponse>
+
+    @GET("posts")
+    fun getPostsByQueryMap(@QueryMap parameter: HashMap<String, String>): Call<PostResponse>
+```
+
+Implemented method:
+
+```kotlin
+    private fun fetchDataFromApiByMap() {
+        val apiService = ApiClient.getApiService()
+
+        val params = HashMap<String, String>()
+        params["userId"] = "1"
+        params["postId"] = "2"
+        val call = apiService.getPostsByQueryMap(params)
+    }
+
+    private fun fetchDataFromApiById() {
+        val apiService = ApiClient.getApiService()
+        val call = apiService.getPostsByUserId("1")
+    }
+
+    private fun fetchDataFromApi() {
+        val apiService = ApiClient.getApiService()
+        val call = apiService.getPosts()
+
+        call.enqueue(object : retrofit2.Callback<List<PostResponse>> {
+            override fun onResponse(
+                call: Call<List<PostResponse>>,
+                response: Response<List<PostResponse>>
+            ) {
+                if (response.isSuccessful) {
+                    val posts = response.body()
+
+                    if (posts != null){
+                        list.clear()
+                        list.addAll(posts)
+                        adapter?.notifyDataSetChanged()
+                    }
+                } else {
+                    Log.e("Error Call Request ", response.message())
+                }
+            }
+
+            override fun onFailure(call: Call<List<PostResponse>>, t: Throwable) {
+                Log.e("onFailure ", t.message.toString())
+            }
+
+        })
+    }
+```
+
+* Create Data
+
+Api service endpoint:
+
+```kotlin
+    @FormUrlEncoded
+    @POST("posts")
+    fun createPosts(
+        @Field("userId") userId: String,
+        @Field("title") text: String,
+        @Field("body") content: String
+    ): Call<PostResponse>
+```
+
+Implemented method:
+
+```kotlin
+        val apiService = ApiClient.getApiService()
+
+        binding.apply {
+
+            apiService.createPosts(
+                useridInput.text.toString(),
+                titleInput.text.toString(),
+                bodyInput.text.toString()
+            ).enqueue(object : retrofit2.Callback<PostResponse> {
+                override fun onResponse(
+                    call: Call<PostResponse>,
+                    response: Response<PostResponse>
+                ) {
+
+                }
+
+                override fun onFailure(call: Call<PostResponse>, t: Throwable) {
+
+                }
+
+            })
+        }
+```
+
+* Update Data
+
+Api service endpoint:
+
+```kotlin
+    //if you used put, all required data will be updated
+    @FormUrlEncoded
+    @PUT("posts/{postId}")
+    fun putPosts(
+        @Path("postId") idPost: Int,
+        @Field("userId") userId: Int,
+        @Field("id") id: Int,
+        @Field("title") title: String?,
+        @Field("body") body: String?
+    ): Call<PostResponse>
+
+    //if you used patch, only several data has depending on the user
+    @FormUrlEncoded
+    @PATCH("posts/{postId}")
+    fun patchPosts(
+        @Path("postId") idPost: Int,
+        @Field("userId") userId: Int,
+        @Field("id") id: Int,
+        @Field("title") title: String?,
+        @Field("body") body: String?
+    ): Call<PostResponse>
+
+```
+
+Implemented method:
+
+```kotlin
+  val apiService = ApiClient.getApiService()
+  apiService.patchPosts(1, 2, 1, null, "Hello world")
+```
+
+* Delete Data
+
+Api service endpoint:
+
+```kotlin
+    @DELETE("posts/{postId}")
+    fun deletePosts(@Path("postId") id: Int): Call<Void>
+```
+
+Implemented method
+
+```kotlin
+  val apiService = ApiClient.getApiService()
+  apiService.deletePosts(1)
+```
+
+### 
 
 
 ---
