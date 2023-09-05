@@ -15,6 +15,9 @@
         android:theme="@style/Theme.ExampleCrudRestfulApi"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.CommentActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ManagePostsActivity"
             android:exported="false" />
         <activity
