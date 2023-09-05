@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     tools:context=".presentation.ManagePostsActivity">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -85,7 +86,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:visibility="invisible"
         style="@style/Widget.Material3.CardView.Elevated"
         app:layout_constraintTop_toBottomOf="@id/buttonSave"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +104,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:visibility="invisible"
         style="@style/Widget.Material3.CardView.Elevated"
         app:layout_constraintTop_toBottomOf="@id/buttonUpdate"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,5 +116,68 @@
             android:padding="12dp"
             android:layout_gravity="center"/>
     </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tx_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/last_data_updated"
+        app:layout_constraintTop_toBottomOf="@id/buttonDelete"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/tx_userid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/userid"
+        app:layout_constraintTop_toBottomOf="@id/tx_update"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tx_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        app:layout_constraintTop_toBottomOf="@id/tx_userid"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tx_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/body"
+        app:layout_constraintTop_toBottomOf="@id/tx_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tx_created"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/created_at"
+        app:layout_constraintTop_toBottomOf="@id/tx_body"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tx_updated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/updated_at"
+        app:layout_constraintTop_toBottomOf="@id/tx_created"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress_form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.Material3.CircularProgressIndicator.Medium"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

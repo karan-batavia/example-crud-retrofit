@@ -3,6 +3,7 @@ package com.ichwan.crud.restful.response
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
+import java.util.Date
 
 /**
  * serialize name digunakan untuk meng-custom nama variable
@@ -17,5 +18,10 @@ data class PostResponse(
     val text: String? = null,
 
     @SerializedName("body")
-    val content: String? = null
+    val content: String? = null,
+
+    val createdAt: Date,
+
+    val updatedAt: Date?
+
 ) : Parcelable
