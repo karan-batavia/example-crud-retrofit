@@ -28,8 +28,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.buttonAddPost.setOnClickListener {
-            startActivity(Intent(this, ManagePostsActivity::class.java))
+        binding.apply {
+
+            buttonComments.setOnClickListener {
+                startActivity(Intent(this@MainActivity, CommentActivity::class.java))
+            }
+
+            buttonAddPost.setOnClickListener {
+                startActivity(Intent(this@MainActivity, ManagePostsActivity::class.java))
+            }
         }
 
         setupRecyclerView(this)
